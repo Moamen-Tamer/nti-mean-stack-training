@@ -93,3 +93,10 @@ balance *= 2;
 balance -= 20;
 
 console.log(`balance: ${balance}`);
+
+// Task 15
+var hotel = window.prompt("hotel name: ");
+var nights = Number(window.prompt("no. of nights: "));
+var confirmation = window.confirm("are you sure?");
+
+console.log(`Hotel: ${hotel}, Nights: ${nights}, Confirmed: ${confirmation}`);
