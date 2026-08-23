@@ -119,3 +119,22 @@ var car2 = Object.assign({}, car1);
 car2.brand = "Honda";
 
 console.log(car1, car2);
+
+// Task 18
+const mixedBag = [
+    "Hello, World!",                    
+    42,                                 
+    true,                               
+    null,                               
+    undefined,                          
+    { name: "Ahmed", age: 25 },         
+    [1, 2, 3]                            
+];
+
+console.log(`type of first item: ${typeof mixedBag[0]}`);
+console.log(`type of second item: ${typeof mixedBag[1]}`);
+console.log(`type of third item: ${typeof mixedBag[2]}`);
+console.log(`type of fourth item: ${typeof mixedBag[3]}`);
+console.log(`type of fifth item: ${typeof mixedBag[4]}`);
+console.log(`type of sixth item: ${typeof mixedBag[5]}`);
+console.log(`type of seventh item: ${typeof mixedBag[6]}`);
