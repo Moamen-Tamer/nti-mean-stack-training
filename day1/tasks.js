@@ -35,3 +35,7 @@ console.log(`Multiplication: ${itemPrice * quantity}`);
 console.log(`Division: ${itemPrice / quantity}`);
 console.log(`Remainder: ${itemPrice % quantity}`);
 console.log(`Square Exponent: ${quantity ** 2}`);
+
+// Task 8
+var favouriteColor = window.prompt("What's your favourite color: ");
+document.getElementById('favouriteColor').innerText = `Your favorite color is: ${favouriteColor}`;
