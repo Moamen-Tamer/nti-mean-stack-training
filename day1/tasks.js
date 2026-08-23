@@ -24,3 +24,14 @@ console.log(city + ", " + country);
 
 // Task 6
 console.log(`location: ${city} - ${country}`);
+
+// Task 7
+var itemPrice = 120;
+var quantity = 3;
+
+console.log(`Total Cost: ${itemPrice * quantity} EGP`);
+console.log(`Difference: ${400 - (itemPrice * quantity)} EGP`);
+console.log(`Multiplication: ${itemPrice * quantity}`);
+console.log(`Division: ${itemPrice / quantity}`);
+console.log(`Remainder: ${itemPrice % quantity}`);
+console.log(`Square Exponent: ${quantity ** 2}`);
