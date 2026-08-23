@@ -100,3 +100,8 @@ var nights = Number(window.prompt("no. of nights: "));
 var confirmation = window.confirm("are you sure?");
 
 console.log(`Hotel: ${hotel}, Nights: ${nights}, Confirmed: ${confirmation}`);
+
+// Task 16
+console.log(2 + 8 + "0"); // 100
+console.log("2" + 8 + 0); // 280
+console.log(2 + "8" + 0); // 280
