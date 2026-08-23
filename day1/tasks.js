@@ -105,3 +105,17 @@ console.log(`Hotel: ${hotel}, Nights: ${nights}, Confirmed: ${confirmation}`);
 console.log(2 + 8 + "0"); // 100
 console.log("2" + 8 + 0); // 280
 console.log(2 + "8" + 0); // 280
+
+// Task 17
+var city1 = "Alex";
+var city2 = city1;
+city2 = "Giza";
+
+console.log(city1, city2); // المتغير city2 بيطبع Giza بدل ما يكون Alex زي city1 عشان هي اخر data اتعملها store جواها
+
+var car1 = { brand: "Toyota" };
+/*var car2 = car1;*/
+var car2 = Object.assign({}, car1);
+car2.brand = "Honda";
+
+console.log(car1, car2);
