@@ -46,3 +46,10 @@ var textScore = "20";
 
 console.log(`loose (==): ${score == textScore}`); // true => عشان الـ== بتقارن القيمة
 console.log(`strict (===): ${score === textScore}`); // false => عشان الـ== بتقارن القيمة و النوع
+
+// Task 10
+var piecesNumber = window.prompt("Enter no. of pieces: ");
+
+console.log(`data type using Number(): ${typeof Number(piecesNumber)}`);
+console.log(`data type using parseInt(): ${typeof parseInt(piecesNumber)}`);
+console.log(`data type using +: ${typeof +piecesNumber}`);
