@@ -63,3 +63,16 @@ fruits[1] = "orange";
 fruits.push("grapes")
 
 console.log(fruits);
+
+// Task 12
+var course = {
+    title: "MEAN stack",
+    hours: 120,
+    level: "advanced"
+};
+
+course.title = "MEAN stack, web development";
+
+console.log(`course hours: ${course.hours}`);
+
+console.log(course);
