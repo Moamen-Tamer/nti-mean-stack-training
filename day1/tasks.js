@@ -15,3 +15,9 @@ console.log(`is available: ${isAvailable} | its type: ${typeof isAvailable}`);
 
 // Task 4
 document.getElementById('mainTitle').innerText = "Practice Time";
+
+// Task 5
+var city = "Cairo";
+var country = "Egypt";
+
+console.log(city + ", " + country);
