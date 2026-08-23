@@ -76,3 +76,11 @@ course.title = "MEAN stack, web development";
 console.log(`course hours: ${course.hours}`);
 
 console.log(course);
+
+// Task 13
+var hasAccount = true;
+var isVerified = false;
+
+console.log(`hasAccount AND isVerified: ${hasAccount && isVerified}`);
+console.log(`hasAccount OR isVerified: ${hasAccount || isVerified}`);
+console.log(`NOT isVerified: ${!isVerified}`);
