@@ -167,3 +167,21 @@ var c = 60;
 var d = 30;
 var e = 30;
 console.log(a + b + c + d + e); // لما الـc كانت بـ"60" دا بيخلي الارقام تتلزق في بعضها زي الـstrings و تدي 90603030 لكن لما الـc تكون بـ60 هتتحسب عادي و النتيجة 210
+
+// Task 22 // مش معانا عشان فيها Function
+// Task 23 // مش معانا عشان فيها Function
+
+// Task 24
+var a = "15";
+var b = 15;
+var c = null;
+var d;
+var e = [15];
+var f = { value: 15 };
+
+console.log(`value of a: ${a}, type of a: ${typeof a}, a == 15: ${a == 15}, a === 15: ${a === 15}`);
+console.log(`value of b: ${b}, type of b: ${typeof b}, b == 15: ${b == 15}, b === 15: ${b === 15}`);
+console.log(`value of c: ${c}, type of c: ${typeof c}, c == 15: ${c == 15}, c === 15: ${c === 15}`);
+console.log(`value of d: ${d}, type of d: ${typeof d}, d == 15: ${d == 15}, d === 15: ${d === 15}`);
+console.log(`value of e: ${e}, type of e: ${typeof e}, e == 15: ${e == 15}, e === 15: ${e === 15}`);
+console.log(`value of f: ${f}, type of f: ${typeof f}, f == 15: ${f == 15}, f === 15: ${f === 15}`);
