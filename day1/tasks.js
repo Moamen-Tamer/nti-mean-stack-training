@@ -39,3 +39,10 @@ console.log(`Square Exponent: ${quantity ** 2}`);
 // Task 8
 var favouriteColor = window.prompt("What's your favourite color: ");
 document.getElementById('favouriteColor').innerText = `Your favorite color is: ${favouriteColor}`;
+
+// Task 9
+var score = 20;
+var textScore = "20";
+
+console.log(`loose (==): ${score == textScore}`); // true => عشان الـ== بتقارن القيمة
+console.log(`strict (===): ${score === textScore}`); // false => عشان الـ== بتقارن القيمة و النوع
