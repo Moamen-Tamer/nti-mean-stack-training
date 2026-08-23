@@ -21,3 +21,6 @@ var city = "Cairo";
 var country = "Egypt";
 
 console.log(city + ", " + country);
+
+// Task 6
+console.log(`location: ${city} - ${country}`);
