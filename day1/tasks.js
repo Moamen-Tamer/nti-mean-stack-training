@@ -149,7 +149,7 @@ console.log(message);
 window.alert(message);
 document.getElementById("result").innerText = `Result:- ${message}`;
 
-// task 20
+// Task 20
 var firstNumber = Number(window.prompt("Enter the first number: "));
 var secondNumber = Number(window.prompt("Enter the second number: "));
 
@@ -159,3 +159,11 @@ console.log(`${firstNumber} * ${secondNumber} = ${firstNumber * secondNumber}`);
 console.log(`${firstNumber} / ${secondNumber} = ${firstNumber / secondNumber}`);
 console.log(`${firstNumber} % ${secondNumber} = ${firstNumber % secondNumber}`);
 console.log(`${firstNumber} ^ ${secondNumber} = ${firstNumber ** secondNumber}`);
+
+// Task 21
+var a = 40;
+var b = 50;
+var c = 60;
+var d = 30;
+var e = 30;
+console.log(a + b + c + d + e); // لما الـc كانت بـ"60" دا بيخلي الارقام تتلزق في بعضها زي الـstrings و تدي 90603030 لكن لما الـc تكون بـ60 هتتحسب عادي و النتيجة 210
