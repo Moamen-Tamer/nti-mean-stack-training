@@ -84,3 +84,12 @@ var isVerified = false;
 console.log(`hasAccount AND isVerified: ${hasAccount && isVerified}`);
 console.log(`hasAccount OR isVerified: ${hasAccount || isVerified}`);
 console.log(`NOT isVerified: ${!isVerified}`);
+
+// Task 14
+var balance = 50;
+
+balance += 30;
+balance *= 2;
+balance -= 20;
+
+console.log(`balance: ${balance}`);
