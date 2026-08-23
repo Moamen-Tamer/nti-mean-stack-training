@@ -148,3 +148,14 @@ var message = `client name: ${clientName}, order price: ${orderPrice}, confirmat
 console.log(message);
 window.alert(message);
 document.getElementById("result").innerText = `Result:- ${message}`;
+
+// task 20
+var firstNumber = Number(window.prompt("Enter the first number: "));
+var secondNumber = Number(window.prompt("Enter the second number: "));
+
+console.log(`${firstNumber} + ${secondNumber} = ${firstNumber + secondNumber}`);
+console.log(`${firstNumber} - ${secondNumber} = ${firstNumber - secondNumber}`);
+console.log(`${firstNumber} * ${secondNumber} = ${firstNumber * secondNumber}`);
+console.log(`${firstNumber} / ${secondNumber} = ${firstNumber / secondNumber}`);
+console.log(`${firstNumber} % ${secondNumber} = ${firstNumber % secondNumber}`);
+console.log(`${firstNumber} ^ ${secondNumber} = ${firstNumber ** secondNumber}`);
