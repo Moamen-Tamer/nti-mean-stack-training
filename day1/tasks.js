@@ -138,3 +138,13 @@ console.log(`type of fourth item: ${typeof mixedBag[3]}`);
 console.log(`type of fifth item: ${typeof mixedBag[4]}`);
 console.log(`type of sixth item: ${typeof mixedBag[5]}`);
 console.log(`type of seventh item: ${typeof mixedBag[6]}`);
+
+// Task 19
+var clientName = window.prompt("Enter your name: ");
+var orderPrice = Number(window.prompt("Enter the price of order: "));
+var confirmation = window.confirm("are you sure?");
+var message = `client name: ${clientName}, order price: ${orderPrice}, confirmation: ${confirmation}`;
+
+console.log(message);
+window.alert(message);
+document.getElementById("result").innerText = `Result:- ${message}`;
