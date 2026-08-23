@@ -185,3 +185,26 @@ console.log(`value of c: ${c}, type of c: ${typeof c}, c == 15: ${c == 15}, c ==
 console.log(`value of d: ${d}, type of d: ${typeof d}, d == 15: ${d == 15}, d === 15: ${d === 15}`);
 console.log(`value of e: ${e}, type of e: ${typeof e}, e == 15: ${e == 15}, e === 15: ${e === 15}`);
 console.log(`value of f: ${f}, type of f: ${typeof f}, f == 15: ${f == 15}, f === 15: ${f === 15}`);
+
+// Task 25
+var productName = window.prompt("Enter product name: ");
+var brand = window.prompt("Enter product brand: ");
+var price = Number(window.prompt("Enter product price: "));
+var category = window.prompt("Enter product category: ");
+var inStock = window.confirm("Is this product in stock?");
+
+var productInfo = {
+    productName,
+    brand,
+    price,
+    category,
+    inStock
+};
+
+var message = `product name: ${productInfo.productName}, brand: ${productInfo.brand}, price: ${productInfo.price}, category: ${productInfo.category}, in stock: ${productInfo.inStock}`;
+
+document.getElementById("mainTitle").innerText = message;
+console.log(message);
+window.alert(message);
+
+console.log(`First letter of product name: ${productInfo.productName[0]}`); // Bonus
