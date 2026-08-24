@@ -118,3 +118,19 @@ if (degree >= 90) {
 var age = Number(window.prompt("Enter you age: "));
 
 console.log(age >= 18 ? "adult" : "minor");
+
+// Task 16
+var day = window.prompt("Enter day name: ");
+
+switch(day) {
+    case "friday":
+        console.log("weekend");
+        break;
+    
+    case "saturday":
+        console.log("weekend");
+        break;
+
+    default:
+        console.log("not weekend");
+}
