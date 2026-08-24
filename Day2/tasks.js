@@ -91,3 +91,12 @@ console.log(`${a} * ${b} = ${a * b}`);
 console.log(`${a} / ${b} = ${a / b}`);
 console.log(`${a} % ${b} = ${a % b}`);
 console.log(`${a} ^ ${b} = ${a ** b}`);
+
+// Task 13
+var age = Number(window.prompt("Enter you age: "));
+
+if (age >= 18) {
+    console.log("You can enter");
+} else {
+    console.log("Sorry, underage");
+}
