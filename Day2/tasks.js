@@ -134,3 +134,10 @@ switch(day) {
     default:
         console.log("not weekend");
 }
+
+// Task 17
+var pricePerPiece = Number(window.prompt("Enter the price per piece: "));
+
+for (var i = 1; i <= 10; i++) {
+    console.log(`${i} x ${pricePerPiece} = ${i * pricePerPiece}`);
+}
