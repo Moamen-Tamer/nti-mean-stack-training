@@ -16,3 +16,11 @@ for(var i = 1; i <= 15; i++) {
 }
 
 console.log(`Total Sales: ${totalSales}`);
+
+// Task 4
+var temp = 1;
+
+while (temp <= 7) {
+    console.log(`Tickets: ${temp}`);
+    temp++;
+}
