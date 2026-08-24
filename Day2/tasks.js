@@ -67,3 +67,9 @@ var inputPrice = "10";
 
 console.log(`dbPrice == inputPrice: ${dbPrice == inputPrice}`); // value comparison
 console.log(`dbPrice === inputPrice: ${dbPrice === inputPrice}`); // value + data type comparison
+
+// Task 10
+var userName = window.prompt("Enter your username: ");
+
+window.alert(`Welcome, ${userName}`);
+console.log(`Welcome, ${userName}`);
