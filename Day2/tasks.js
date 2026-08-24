@@ -171,3 +171,20 @@ var students = ["ahmed", "mohamed", "amira", "aya", "mo'men", "dina", "omar", "a
 for(var i = 0; i < students.length; i++) {
     console.log(`Student ${i + 1}: ${students[i]}`);
 }
+
+// Task 21
+var expenses = [];
+
+for(var i = 0; i < 5; i++) {
+    expenses[i] = Number(window.prompt(`Enter day ${i + 1} expeneses: `));
+}
+
+var sum = 0;
+
+for(var expense of expenses) {
+    sum += expense;
+}
+
+var avg = sum / expenses.length;
+
+console.log(`sum: ${sum}, average: ${avg}`);
