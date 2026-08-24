@@ -60,3 +60,10 @@ var isStudent = true;
 console.log(`username: ${userName}, data type: ${typeof userName}`);
 console.log(`user age: ${userAge}, data type: ${typeof userAge}`);
 console.log(`is student: ${isStudent}, data type: ${typeof isStudent}`);
+
+// Task 9
+var dbPrice = 10;
+var inputPrice = "10";
+
+console.log(`dbPrice == inputPrice: ${dbPrice == inputPrice}`); // value comparison
+console.log(`dbPrice === inputPrice: ${dbPrice === inputPrice}`); // value + data type comparison
