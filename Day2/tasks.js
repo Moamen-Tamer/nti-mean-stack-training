@@ -141,3 +141,14 @@ var pricePerPiece = Number(window.prompt("Enter the price per piece: "));
 for (var i = 1; i <= 10; i++) {
     console.log(`${i} x ${pricePerPiece} = ${i * pricePerPiece}`);
 }
+
+// Task 18
+var size = Number(window.prompt("Enter file size: "));
+
+if (size > 0) {
+    for(var i = 1; i <= size; i++) {
+        console.log(`Download progress: ${i}`);
+    }
+} else {
+    console.log("Invalid file size");
+}
