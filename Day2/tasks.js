@@ -238,3 +238,20 @@ if (sum <= 20) {
 } else {
     console.log("Too big to print line by line");
 }
+
+// Task 25
+var n = Number(window.prompt("Enter a number: "));
+var factorial = 1;
+
+if (n < 0) {
+    console.error("number is negative");
+} else {
+    for(var i = 1; i <= n; i++) {
+        factorial *= i;
+    }
+}
+
+var message = `${n}! = ${factorial}`;
+
+console.log(message);
+window.alert(message);
