@@ -188,3 +188,23 @@ for(var expense of expenses) {
 var avg = sum / expenses.length;
 
 console.log(`sum: ${sum}, average: ${avg}`);
+
+// Task 22
+var correctPin = "1234";
+var attempts = 3;
+var pin;
+
+while(attempts > 0) {
+    pin = window.prompt("Enter pin: ");
+
+    if (pin === correctPin) {
+        console.log("Success");
+        break;
+    }
+
+    attempts--;
+}
+
+if (attempts === 0) {
+    console.log("Failed");
+}
