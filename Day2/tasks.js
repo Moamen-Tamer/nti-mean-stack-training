@@ -113,3 +113,8 @@ if (degree >= 90) {
 } else {
     console.log(`Grade: D`);
 }
+
+// Task 15
+var age = Number(window.prompt("Enter you age: "));
+
+console.log(age >= 18 ? "adult" : "minor");
