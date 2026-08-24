@@ -32,3 +32,11 @@ while (countdown > 0) {
     console.log(`remaining seconds: ${countdown}`);
     countdown--;
 }
+
+// Task 6
+var i = 1;
+
+do {
+    console.log(`${i} - Welcome!`);
+    i++;
+} while (i <= 5);
