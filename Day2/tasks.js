@@ -80,3 +80,14 @@ var piecesNumber = window.prompt("Enter no. of pieces: ");
 console.log(`data type using Number(): ${typeof Number(piecesNumber)}`);
 console.log(`data type using parseInt(): ${typeof parseInt(piecesNumber)}`);
 console.log(`data type using +: ${typeof +piecesNumber}`);
+
+// Task 12
+var a = 10;
+var b = 3;
+
+console.log(`${a} + ${b} = ${a + b}`);
+console.log(`${a} - ${b} = ${a - b}`);
+console.log(`${a} * ${b} = ${a * b}`);
+console.log(`${a} / ${b} = ${a / b}`);
+console.log(`${a} % ${b} = ${a % b}`);
+console.log(`${a} ^ ${b} = ${a ** b}`);
