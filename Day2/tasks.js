@@ -100,3 +100,16 @@ if (age >= 18) {
 } else {
     console.log("Sorry, underage");
 }
+
+// Task 14
+var degree = Number(window.prompt("Enter your degree: "));
+
+if (degree >= 90) {
+    console.log(`Grade: A`);
+} else if (degree >= 80) {
+    console.log(`Grade: B`);
+} else if (degree >= 70) {
+    console.log(`Grade: C`);
+} else {
+    console.log(`Grade: D`);
+}
