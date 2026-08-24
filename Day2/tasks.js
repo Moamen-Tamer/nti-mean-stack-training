@@ -73,3 +73,10 @@ var userName = window.prompt("Enter your username: ");
 
 window.alert(`Welcome, ${userName}`);
 console.log(`Welcome, ${userName}`);
+
+// Task 11
+var piecesNumber = window.prompt("Enter no. of pieces: ");
+
+console.log(`data type using Number(): ${typeof Number(piecesNumber)}`);
+console.log(`data type using parseInt(): ${typeof parseInt(piecesNumber)}`);
+console.log(`data type using +: ${typeof +piecesNumber}`);
