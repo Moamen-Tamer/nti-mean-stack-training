@@ -51,3 +51,12 @@ while (itemsInCart < 5) {
 do {
   console.log("Start Shopping!"); // do while loop executes once before checking condition then it's like normal while loop
 } while (itemsInCart < 5);
+
+// Task 8
+var userName = "Ali";
+var userAge = 22;
+var isStudent = true;
+
+console.log(`username: ${userName}, data type: ${typeof userName}`);
+console.log(`user age: ${userAge}, data type: ${typeof userAge}`);
+console.log(`is student: ${isStudent}, data type: ${typeof isStudent}`);
