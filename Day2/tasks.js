@@ -164,3 +164,10 @@ for(var i = startOfRange; i <= endOfRange; i++) {
         console.log(`order id ${i}: normal`);
     }
 }
+
+// Task 20
+var students = ["ahmed", "mohamed", "amira", "aya", "mo'men", "dina", "omar", "ali", "sama"];
+
+for(var i = 0; i < students.length; i++) {
+    console.log(`Student ${i + 1}: ${students[i]}`);
+}
