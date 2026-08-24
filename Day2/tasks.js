@@ -152,3 +152,15 @@ if (size > 0) {
 } else {
     console.log("Invalid file size");
 }
+
+// Task 19
+var startOfRange = Number(window.prompt("Enter the starting Number"));
+var endOfRange = Number(window.prompt("Enter the ending Number"));
+
+for(var i = startOfRange; i <= endOfRange; i++) {
+    if (i % 2 == 0) {
+        console.log(`order id ${i}: express`);
+    } else {
+        console.log(`order id ${i}: normal`);
+    }
+}
