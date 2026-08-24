@@ -40,3 +40,14 @@ do {
     console.log(`${i} - Welcome!`);
     i++;
 } while (i <= 5);
+
+// Task 7
+var itemsInCart = 10;
+
+while (itemsInCart < 5) {
+  console.log("while loop executed"); // while loop check condition before execution
+}
+
+do {
+  console.log("Start Shopping!"); // do while loop executes once before checking condition then it's like normal while loop
+} while (itemsInCart < 5);
