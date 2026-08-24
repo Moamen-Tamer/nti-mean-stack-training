@@ -213,10 +213,28 @@ if (attempts === 0) {
 var hasAccount = true;
 var isVerified = false;
 
-if(hasAccount && isVerified) {
+if (hasAccount && isVerified) {
     console.log("Welcome back");
 } else if (hasAccount || isVerified) {
     console.log("Please verify your account");
 } else if (!hasAccount) {
     console.log("Please sign up");
+}
+
+// Task 24
+var a = 40;
+var b = 50;
+var c = 60;
+var d = 30;
+var e = 30;
+var sum = a + b + c + d + e;
+
+console.log(sum);
+
+if (sum <= 20) {
+    for(var i = 1; i <= sum; i++) {
+        console.log(i);
+    }
+} else {
+    console.log("Too big to print line by line");
 }
