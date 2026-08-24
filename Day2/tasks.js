@@ -208,3 +208,15 @@ while(attempts > 0) {
 if (attempts === 0) {
     console.log("Failed");
 }
+
+// Task 23
+var hasAccount = true;
+var isVerified = false;
+
+if(hasAccount && isVerified) {
+    console.log("Welcome back");
+} else if (hasAccount || isVerified) {
+    console.log("Please verify your account");
+} else if (!hasAccount) {
+    console.log("Please sign up");
+}
