@@ -24,3 +24,11 @@ while (temp <= 7) {
     console.log(`Tickets: ${temp}`);
     temp++;
 }
+
+// Task 5
+var countdown = 8;
+
+while (countdown > 0) {
+    console.log(`remaining seconds: ${countdown}`);
+    countdown--;
+}
