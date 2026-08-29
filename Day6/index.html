@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 6 - NTI Mini Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <header class="app-header">
+      <p class="eyebrow">Mini Store</p>
+      <h1>NTI Mini Store</h1>
+      <p class="subtitle">Pick an option from 1 to 6.</p>
+    </header>
+
+    <nav class="menu" id="mainMenu">
+
+      <button class="menu-btn" id="menuAddBtn">
+        <span class="menu-num">1</span>
+        <span>Add Product</span>
+      </button>
+
+      <button class="menu-btn" id="menuShowAllBtn">
+        <span class="menu-num">2</span>
+        <span>Show All Products</span>
+      </button>
+
+      <button class="menu-btn" id="menuShowByIdBtn">
+        <span class="menu-num">3</span>
+        <span>Show Product by ID</span>
+      </button>
+
+      <button class="menu-btn" id="menuUpdateBtn">
+        <span class="menu-num">4</span>
+        <span>Update Product</span>
+      </button>
+
+      <button class="menu-btn" id="menuDeleteBtn">
+        <span class="menu-num">5</span>
+        <span>Delete Product</span>
+      </button>
+
+      <button class="menu-btn" id="menuSearchBtn">
+        <span class="menu-num">6</span>
+        <span>Search / Filter</span>
+      </button>
+
+    </nav>
+
+    <div id="statusMessage" class="status hidden"></div>
+
+    <form class="panel hidden" id="productForm">
+
+      <h2 id="productFormTitle">Add Product</h2>
+      <p id="productFormHint"></p>
+
+      <div class="field hidden" id="productIdField">
+        <label for="productIdInput">Product ID</label>
+        <input type="number" id="productIdInput" placeholder="e.g. 2">
+      </div>
+
+      <div class="field">
+        <label for="productNameInput">Name</label>
+        <input type="text" id="productNameInput" placeholder="e.g. Laptop">
+      </div>
+
+      <div class="field">
+        <label for="productPriceInput">Price</label>
+        <input type="number" id="productPriceInput" placeholder="e.g. 1500">
+      </div>
+
+      <div class="field">
+        <label for="productCategoryInput">Category</label>
+        <input type="text" id="productCategoryInput" placeholder="e.g. Electronics">
+      </div>
+
+      <div class="field">
+        <label for="productQuantityInput">Quantity</label>
+        <input type="number" id="productQuantityInput" placeholder="e.g. 10">
+      </div>
+
+      <div class="panel-actions">
+        <button type="submit" id="addProductBtn" class="btn btn-primary">Add</button>
+        <button type="submit" id="updateProductBtn" class="btn btn-primary">Update</button>
+        <button type="button" id="cancelProductFormBtn" class="btn btn-ghost">Cancel</button>
+      </div>
+
+    </form>
+
+    <form class="panel hidden" id="deleteForm">
+
+      <h2>Delete Product</h2>
+
+      <div class="field">
+        <label for="deleteIdInput">Product ID</label>
+        <input type="number" id="deleteIdInput" placeholder="Enter product ID" required>
+      </div>
+
+      <div class="panel-actions">
+        <button type="submit" id="deleteProductBtn" class="btn btn-danger">Delete</button>
+        <button type="button" id="cancelDeleteBtn" class="btn btn-ghost">Cancel</button>
+      </div>
+
+    </form>
+
+    <form class="panel hidden" id="searchForm">
+
+      <h2>Search / Filter</h2>
+
+      <div class="field">
+        <label for="searchKeywordInput">Keyword</label>
+        <input type="text" id="searchKeywordInput" placeholder="Search by name or category">
+      </div>
+
+      <div class="panel-actions">
+        <button type="submit" id="searchBtn" class="btn btn-primary">Search</button>
+        <button type="button" id="cancelSearchBtn" class="btn btn-ghost">Cancel</button>
+      </div>
+
+    </form>
+
+    <form class="panel hidden" id="showByIdForm">
+
+      <h2>Show Product by ID</h2>
+
+      <div class="field">
+        <label for="showByIdInput">Product ID</label>
+        <input type="number" id="showByIdInput" placeholder="Enter product ID" required>
+      </div>
+
+      <div class="panel-actions">
+        <button type="submit" id="findByIdBtn" class="btn btn-primary">Find</button>
+        <button type="button" id="cancelShowByIdBtn" class="btn btn-ghost">Cancel</button>
+      </div>
+
+    </form>
+
+    <section class="table-section hidden" id="tableSection">
+
+      <h2 id="tableTitle">Products</h2>
+
+      <div class="table-wrap">
+        <table id="productsTable">
+
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody id="productsTableBody"></tbody>
+
+        </table>
+      </div>
+
+    </section>
+
+  </div>
+
+  <script src="tasks.js"></script>
+  <script src="uiDom.js"></script>
+
+</body>
+
+</html>
