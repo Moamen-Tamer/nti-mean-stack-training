@@ -1,250 +1,193 @@
-var allPanels = document.querySelectorAll(".panel");
+function id(elementId) {
+    return document.getElementById(elementId);
+}
 
 function hideEverything() {
-    for (var i = 0; i < allPanels.length; i++) {
-        allPanels[i].classList.add("hidden");
-    }
+    document.querySelectorAll(".panel").forEach(function (panel) {
+        panel.classList.add("hidden");
+    });
 
-    document.getElementById("tableSection").classList.add("hidden");
-    document.getElementById("statusMessage").classList.add("hidden");
+    id("tableSection").classList.add("hidden");
+    id("statusMessage").classList.add("hidden");
 }
 
 function showStatus(text, isError) {
-    var box = document.getElementById("statusMessage");
-
+    var box = id("statusMessage");
+    
     box.textContent = text;
     box.classList.remove("hidden");
-
-    if (isError === true) {
-        box.classList.add("error");
-        box.classList.remove("success");
-    } else {
-        box.classList.add("success");
-        box.classList.remove("error");
-    }
+    box.classList.toggle("error", isError === true);
+    box.classList.toggle("success", isError !== true);
 }
 
 function showProductsTable(list, title) {
     hideEverything();
 
-    var tableSection = document.getElementById("tableSection");
-    var tableBody = document.getElementById("productsTableBody");
-
-    tableSection.classList.remove("hidden");
-    document.getElementById("tableTitle").textContent = title;
-
-    tableBody.innerHTML = "";
+    id("tableSection").classList.remove("hidden");
+    id("tableTitle").textContent = title;
 
     if (!list || list.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="6">No products found.</td></tr>`;
+        id("productsTableBody").innerHTML = `<tr><td colspan="6">No products found.</td></tr>`;
+
         return;
     }
 
-    for (var i = 0; i < list.length; i++) {
-        var product = list[i];
-        var row = document.createElement("tr");
-
-        row.innerHTML = `
-            <td class="cell-id">${product.id}</td>
-            <td>${product.name}</td>
-            <td class="cell-price">${product.price}</td>
-            <td>${product.category}</td>
-            <td class="cell-qty">${product.quantity}</td>
-            <td class="actions-cell">
-                <button class="btn btn-small btn-secondary update-btn" data-id="${product.id}">Update</button>
-                <button class="btn btn-small btn-danger delete-btn" data-id="${product.id}">Delete</button>
-            </td>
+    id("productsTableBody").innerHTML = list.map(function (product) {
+        return `
+            <tr>
+                <td class="cell-id">${product.id}</td>
+                <td>${product.name}</td>
+                <td class="cell-price">${product.price}</td>
+                <td>${product.category}</td>
+                <td class="cell-qty">${product.quantity}</td>
+                <td class="actions-cell">
+                    <button class="btn btn-small btn-secondary update-btn" data-id="${product.id}">Update</button>
+                    <button class="btn btn-small btn-danger delete-btn" data-id="${product.id}">Delete</button>
+                </td>
+            </tr>
         `;
-
-        tableBody.appendChild(row);
-    }
+    }).join("");
 }
 
-document.getElementById("productsTableBody").addEventListener("click", function (event) {
-    var clickedId = event.target.getAttribute("data-id");
-
-    if (!clickedId) {
-        return;
-    }
-
-    var product = getProductById(Number(clickedId));
-
-    if (!product) {
-        return;
-    }
-
-    if (event.target.classList.contains("update-btn")) {
-        openUpdateForm();
-
-        document.getElementById("productIdInput").value = product.id;
-        document.getElementById("productNameInput").value = product.name;
-        document.getElementById("productPriceInput").value = product.price;
-        document.getElementById("productCategoryInput").value = product.category;
-        document.getElementById("productQuantityInput").value = product.quantity;
-    }
-
-    if (event.target.classList.contains("delete-btn")) {
-        var result = deleteProduct(Number(clickedId));
-
-        if (typeof result === "string") {
-            if (result.indexOf("cancelled") === -1) {
-                showStatus(result, true);
-            }
-            return;
-        }
-
-        showStatus("Product deleted successfully!", false);
-
-        showProductsTable(
-            getAllProducts(),
-            document.getElementById("tableTitle").textContent
-        );
-    }
-});
-
 function clearForm() {
-    document.getElementById("productIdInput").value = "";
-    document.getElementById("productNameInput").value = "";
-    document.getElementById("productPriceInput").value = "";
-    document.getElementById("productCategoryInput").value = "";
-    document.getElementById("productQuantityInput").value = "";
+    ["productIdInput", "productNameInput", "productPriceInput", "productCategoryInput", "productQuantityInput"]
+        .forEach(function (fieldId) {
+            id(fieldId).value = "";
+        });
 }
 
 function openAddForm() {
     hideEverything();
 
-    document.getElementById("productForm").classList.remove("hidden");
-    document.getElementById("productFormTitle").textContent = "Add Product";
-    document.getElementById("productIdField").classList.add("hidden");
-
-    document.getElementById("addProductBtn").disabled = false;
-    document.getElementById("updateProductBtn").disabled = true;
+    id("productForm").classList.remove("hidden");
+    id("productFormTitle").textContent = "Add Product";
+    id("productIdField").classList.add("hidden");
+    id("addProductBtn").disabled = false;
+    id("updateProductBtn").disabled = true;
 }
 
 function openUpdateForm() {
     hideEverything();
 
-    document.getElementById("productForm").classList.remove("hidden");
-    document.getElementById("productFormTitle").textContent = "Update Product";
-    document.getElementById("productIdField").classList.remove("hidden");
-
-    document.getElementById("addProductBtn").disabled = true;
-    document.getElementById("updateProductBtn").disabled = false;
+    id("productForm").classList.remove("hidden");
+    id("productFormTitle").textContent = "Update Product";
+    id("productIdField").classList.remove("hidden");
+    id("addProductBtn").disabled = true;
+    id("updateProductBtn").disabled = false;
 }
 
-document.getElementById("addProductBtn").addEventListener("click", function (event) {
-    event.preventDefault();
+id("productsTableBody").addEventListener("click", function (event) {
+    var clickedId = event.target.getAttribute("data-id");
 
-    var result = createProduct(
-        document.getElementById("productNameInput").value,
-        document.getElementById("productPriceInput").value,
-        document.getElementById("productCategoryInput").value,
-        document.getElementById("productQuantityInput").value
-    );
+    if (!clickedId) return;
 
-    if (typeof result === "string") {
-        showStatus(result, true);
-    } else {
-        showStatus(`Product added successfully with ID: ${result.id}`, false);
-        clearForm();
+    var product = getProductById(Number(clickedId));
+
+    if (!product) return;
+
+    if (event.target.classList.contains("update-btn")) {
+        openUpdateForm();
+
+        id("productIdInput").value = product.id;
+        id("productNameInput").value = product.name;
+        id("productPriceInput").value = product.price;
+        id("productCategoryInput").value = product.category;
+        id("productQuantityInput").value = product.quantity;
     }
-});
 
-document.getElementById("updateProductBtn").addEventListener("click", function (event) {
-    event.preventDefault();
+    if (event.target.classList.contains("delete-btn")) {
+        deleteProduct(Number(clickedId));
 
-    var result = updateProduct(
-        Number(document.getElementById("productIdInput").value),
-        document.getElementById("productNameInput").value,
-        document.getElementById("productPriceInput").value,
-        document.getElementById("productCategoryInput").value,
-        document.getElementById("productQuantityInput").value
-    );
-
-    if (typeof result === "string") {
-        showStatus(result, true);
-    } else {
-        showStatus("Product updated successfully!", false);
-        clearForm();
-    }
-});
-
-document.getElementById("cancelProductFormBtn").addEventListener("click", hideEverything);
-
-document.getElementById("searchBtn").addEventListener("click", function (event) {
-    event.preventDefault();
-
-    var keyword = document.getElementById("searchKeywordInput").value;
-    var result = filterProducts(keyword);
-
-    showProductsTable(result, `Search Results for '${keyword}'`);
-});
-
-document.getElementById("cancelSearchBtn").addEventListener("click", hideEverything);
-
-document.getElementById("deleteProductBtn").addEventListener("click", function (event) {
-    event.preventDefault();
-
-    var id = Number(document.getElementById("deleteIdInput").value);
-    var result = deleteProduct(id);
-
-    if (typeof result === "string") {
-        showStatus(result, true);
-    } else {
         showStatus("Product deleted successfully!", false);
-        document.getElementById("deleteIdInput").value = "";
+        showProductsTable(getAllProducts(), id("tableTitle").textContent);
     }
 });
 
-document.getElementById("cancelDeleteBtn").addEventListener("click", hideEverything);
-
-document.getElementById("findByIdBtn").addEventListener("click", function (event) {
+id("addProductBtn").addEventListener("click", function (event) {
     event.preventDefault();
 
-    var id = Number(document.getElementById("showByIdInput").value);
-    var product = getProductById(id);
+    var result = createProduct(id("productNameInput").value, id("productPriceInput").value, id("productCategoryInput").value, id("productQuantityInput").value);
+
+    showStatus(`Product added successfully with ID: ${result.id}`, false);
+    clearForm();
+});
+
+id("updateProductBtn").addEventListener("click", function (event) {
+    event.preventDefault();
+
+    updateProduct(Number(id("productIdInput").value), id("productNameInput").value, id("productPriceInput").value, id("productCategoryInput").value, id("productQuantityInput").value);
+
+    showStatus("Product updated successfully!", false);
+    clearForm();
+});
+
+id("cancelProductFormBtn").addEventListener("click", hideEverything);
+
+id("searchBtn").addEventListener("click", function (event) {
+    event.preventDefault();
+
+    var keyword = id("searchKeywordInput").value;
+
+    showProductsTable(filterProducts(keyword), `Search Results for '${keyword}'`);
+});
+
+id("cancelSearchBtn").addEventListener("click", hideEverything);
+
+id("deleteProductBtn").addEventListener("click", function (event) {
+    event.preventDefault();
+
+    deleteProduct(Number(id("deleteIdInput").value));
+
+    showStatus("Product deleted successfully!", false);
+    id("deleteIdInput").value = "";
+});
+
+id("cancelDeleteBtn").addEventListener("click", hideEverything);
+
+id("findByIdBtn").addEventListener("click", function (event) {
+    event.preventDefault();
+    
+    var productId = Number(id("showByIdInput").value);
+    var product = getProductById(productId);
 
     if (product) {
-        showProductsTable([product], `Product Details (ID: ${id})`);
+        showProductsTable([product], `Product Details (ID: ${productId})`);
     } else {
         hideEverything();
         showStatus("Error: Product not found.", true);
     }
 });
 
-document.getElementById("cancelShowByIdBtn").addEventListener("click", hideEverything);
+id("cancelShowByIdBtn").addEventListener("click", hideEverything);
 
-document.getElementById("menuAddBtn").addEventListener("click", function () {
+id("menuAddBtn").addEventListener("click", function () {
     openAddForm();
     clearForm();
 });
 
-document.getElementById("menuShowAllBtn").addEventListener("click", function () {
+id("menuShowAllBtn").addEventListener("click", function () {
     showProductsTable(getAllProducts(), "All Products");
 });
 
-document.getElementById("menuShowByIdBtn").addEventListener("click", function () {
+id("menuShowByIdBtn").addEventListener("click", function () {
     hideEverything();
-
-    document.getElementById("showByIdForm").classList.remove("hidden");
-    document.getElementById("showByIdInput").value = "";
+    id("showByIdForm").classList.remove("hidden");
+    id("showByIdInput").value = "";
 });
 
-document.getElementById("menuUpdateBtn").addEventListener("click", function () {
+id("menuUpdateBtn").addEventListener("click", function () {
     openUpdateForm();
     clearForm();
 });
 
-document.getElementById("menuDeleteBtn").addEventListener("click", function () {
+id("menuDeleteBtn").addEventListener("click", function () {
     hideEverything();
-
-    document.getElementById("deleteForm").classList.remove("hidden");
-    document.getElementById("deleteIdInput").value = "";
+    id("deleteForm").classList.remove("hidden");
+    id("deleteIdInput").value = "";
 });
 
-document.getElementById("menuSearchBtn").addEventListener("click", function () {
+id("menuSearchBtn").addEventListener("click", function () {
     hideEverything();
-
-    document.getElementById("searchForm").classList.remove("hidden");
-    document.getElementById("searchKeywordInput").value = "";
+    id("searchForm").classList.remove("hidden");
+    id("searchKeywordInput").value = "";
 });

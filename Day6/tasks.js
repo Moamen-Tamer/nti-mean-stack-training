@@ -26,6 +26,7 @@ function createProduct(name, price, category, quantity) {
     };
 
     products.push(newProduct);
+    
     return newProduct;
 }
 
