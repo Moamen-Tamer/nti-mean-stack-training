@@ -7,14 +7,14 @@ var products = [
 
 var nextId = 5;
 
-var createProduct = (name, price, category, quantity) => {
+function createProduct(name, price, category, quantity) {
     var trimmedName = name ? name.trim() : "";
     var trimmedCategory = category ? category.trim() : "";
-    
+
     if (trimmedName === "") return "Error: name is required";
-    
+
     if (price <= 0 || isNaN(price)) return "Error: price must be greater than 0";
-    
+
     if (quantity < 0 || !Number.isInteger(Number(quantity)) || isNaN(quantity)) return "Error: quantity must be 0 or more";
 
     var newProduct = {
@@ -27,43 +27,53 @@ var createProduct = (name, price, category, quantity) => {
 
     products.push(newProduct);
     return newProduct;
-};
+}
 
-var getAllProducts = () => products;
+function getAllProducts() {
+    return products;
+}
 
-var printProducts = (list) => console.table(list);
+function printProducts(list) {
+    console.table(list);
+}
 
-var getProductById = (id) => {
-    var product = products.find((product) => product.id === Number(id));
-    
+function getProductById(id) {
+    var product = products.find(function (product) {
+        return product.id === Number(id);
+    });
+
     return product || null;
-};
+}
 
-var updateProduct = (id, name, price, category, quantity) => {
-    var index = products.findIndex((product) => product.id === id);
+function updateProduct(id, name, price, category, quantity) {
+    var index = products.findIndex(function (product) {
+        return product.id === id;
+    });
 
     if (index === -1) return "Error: product not found";
 
     var product = products[index];
 
     if (name !== null && name.trim() !== "") product.name = name.trim();
-    
+
     if (price !== null && price !== "") product.price = Number(price);
-    
+
     if (category !== null && category.trim() !== "") product.category = category.trim();
-    
+
     if (quantity !== null && quantity !== "") product.quantity = Number(quantity);
 
     return product;
-};
+}
 
-var deleteProduct = (id) => {
-    var index = products.findIndex((product) => product.id === id);
+function deleteProduct(id) {
+    var index = products.findIndex(function (product) {
+        return product.id === id;
+    });
 
     if (index === -1) return "Error: product not found";
 
     var confirmation = window.confirm("Are you sure you want to delete this product?");
-    
+
     if (confirmation) {
         var removedItem = products.splice(index, 1)[0];
 
@@ -71,17 +81,17 @@ var deleteProduct = (id) => {
     } else {
         return "Error: Deletion cancelled";
     }
-};
+}
 
-var filterProducts = (keyword) => {
+function filterProducts(keyword) {
     if (!keyword) return products;
-    
+
     var lowerKeyword = keyword.trim().toLowerCase();
-    
-    var filtered = products.filter((product) => {
-        return product.name.toLowerCase().includes(lowerKeyword) || 
+
+    var filtered = products.filter(function (product) {
+        return product.name.toLowerCase().includes(lowerKeyword) ||
                product.category.toLowerCase().includes(lowerKeyword);
     });
-    
+
     return filtered;
-};
+}

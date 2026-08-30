@@ -1,31 +1,31 @@
-var panels = document.querySelectorAll(".panel");
+var allPanels = document.querySelectorAll(".panel");
 
-function hideAll() {
-    for (var i = 0; i < panels.length; i++) {
-        panels[i].classList.add("hidden");
+function hideEverything() {
+    for (var i = 0; i < allPanels.length; i++) {
+        allPanels[i].classList.add("hidden");
     }
 
     document.getElementById("tableSection").classList.add("hidden");
     document.getElementById("statusMessage").classList.add("hidden");
 }
 
-function showMessage(message, error) {
-    var messageBox = document.getElementById("statusMessage");
+function showStatus(text, isError) {
+    var box = document.getElementById("statusMessage");
 
-    messageBox.textContent = message;
-    messageBox.classList.remove("hidden");
+    box.textContent = text;
+    box.classList.remove("hidden");
 
-    if (error) {
-        messageBox.classList.add("error");
-        messageBox.classList.remove("success");
+    if (isError === true) {
+        box.classList.add("error");
+        box.classList.remove("success");
     } else {
-        messageBox.classList.add("success");
-        messageBox.classList.remove("error");
+        box.classList.add("success");
+        box.classList.remove("error");
     }
 }
 
-function showProducts(products, title) {
-    hideAll();
+function showProductsTable(list, title) {
+    hideEverything();
 
     var tableSection = document.getElementById("tableSection");
     var tableBody = document.getElementById("productsTableBody");
@@ -35,18 +35,13 @@ function showProducts(products, title) {
 
     tableBody.innerHTML = "";
 
-    if (!products || products.length === 0) {
-        tableBody.innerHTML = `
-            <tr>
-                <td colspan="6">No products found.</td>
-            </tr>
-        `;
-
+    if (!list || list.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="6">No products found.</td></tr>`;
         return;
     }
 
-    for (var i = 0; i < products.length; i++) {
-        var product = products[i];
+    for (var i = 0; i < list.length; i++) {
+        var product = list[i];
         var row = document.createElement("tr");
 
         row.innerHTML = `
@@ -56,12 +51,8 @@ function showProducts(products, title) {
             <td>${product.category}</td>
             <td class="cell-qty">${product.quantity}</td>
             <td class="actions-cell">
-                <button class="btn btn-small btn-secondary action-update" data-id="${product.id}">
-                    Update
-                </button>
-                <button class="btn btn-small btn-danger action-delete" data-id="${product.id}">
-                    Delete
-                </button>
+                <button class="btn btn-small btn-secondary update-btn" data-id="${product.id}">Update</button>
+                <button class="btn btn-small btn-danger delete-btn" data-id="${product.id}">Delete</button>
             </td>
         `;
 
@@ -70,17 +61,20 @@ function showProducts(products, title) {
 }
 
 document.getElementById("productsTableBody").addEventListener("click", function (event) {
+    var clickedId = event.target.getAttribute("data-id");
 
-    var id = event.target.getAttribute("data-id");
+    if (!clickedId) {
+        return;
+    }
 
-    if (!id) return;
+    var product = getProductById(Number(clickedId));
 
-    var product = getProductById(Number(id));
+    if (!product) {
+        return;
+    }
 
-    if (!product) return;
-
-    if (event.target.classList.contains("action-update")) {
-        setupUpdateMode();
+    if (event.target.classList.contains("update-btn")) {
+        openUpdateForm();
 
         document.getElementById("productIdInput").value = product.id;
         document.getElementById("productNameInput").value = product.name;
@@ -89,25 +83,26 @@ document.getElementById("productsTableBody").addEventListener("click", function 
         document.getElementById("productQuantityInput").value = product.quantity;
     }
 
-    if (event.target.classList.contains("action-delete")) {
-        var result = deleteProduct(Number(id));
+    if (event.target.classList.contains("delete-btn")) {
+        var result = deleteProduct(Number(clickedId));
 
         if (typeof result === "string") {
-            if (result.indexOf("cancelled") === -1) showMessage(result, true);
-
+            if (result.indexOf("cancelled") === -1) {
+                showStatus(result, true);
+            }
             return;
         }
 
-        showMessage("Product deleted successfully!", false);
+        showStatus("Product deleted successfully!", false);
 
-        showProducts(
+        showProductsTable(
             getAllProducts(),
             document.getElementById("tableTitle").textContent
         );
     }
 });
 
-function clearInputs() {
+function clearForm() {
     document.getElementById("productIdInput").value = "";
     document.getElementById("productNameInput").value = "";
     document.getElementById("productPriceInput").value = "";
@@ -115,8 +110,8 @@ function clearInputs() {
     document.getElementById("productQuantityInput").value = "";
 }
 
-function setupAddMode() {
-    hideAll();
+function openAddForm() {
+    hideEverything();
 
     document.getElementById("productForm").classList.remove("hidden");
     document.getElementById("productFormTitle").textContent = "Add Product";
@@ -126,8 +121,8 @@ function setupAddMode() {
     document.getElementById("updateProductBtn").disabled = true;
 }
 
-function setupUpdateMode() {
-    hideAll();
+function openUpdateForm() {
+    hideEverything();
 
     document.getElementById("productForm").classList.remove("hidden");
     document.getElementById("productFormTitle").textContent = "Update Product";
@@ -148,10 +143,10 @@ document.getElementById("addProductBtn").addEventListener("click", function (eve
     );
 
     if (typeof result === "string") {
-        showMessage(result, true);
+        showStatus(result, true);
     } else {
-        showMessage(`Product added successfully with ID: ${result.id}`, false);
-        clearInputs();
+        showStatus(`Product added successfully with ID: ${result.id}`, false);
+        clearForm();
     }
 });
 
@@ -167,14 +162,14 @@ document.getElementById("updateProductBtn").addEventListener("click", function (
     );
 
     if (typeof result === "string") {
-        showMessage(result, true);
+        showStatus(result, true);
     } else {
-        showMessage("Product updated successfully!", false);
-        clearInputs();
+        showStatus("Product updated successfully!", false);
+        clearForm();
     }
 });
 
-document.getElementById("cancelProductFormBtn").addEventListener("click", hideAll);
+document.getElementById("cancelProductFormBtn").addEventListener("click", hideEverything);
 
 document.getElementById("searchBtn").addEventListener("click", function (event) {
     event.preventDefault();
@@ -182,11 +177,10 @@ document.getElementById("searchBtn").addEventListener("click", function (event) 
     var keyword = document.getElementById("searchKeywordInput").value;
     var result = filterProducts(keyword);
 
-    showProducts(result, `Search Results for '${keyword}'`);
+    showProductsTable(result, `Search Results for '${keyword}'`);
 });
 
-document.getElementById("cancelSearchBtn")
-    .addEventListener("click", hideAll);
+document.getElementById("cancelSearchBtn").addEventListener("click", hideEverything);
 
 document.getElementById("deleteProductBtn").addEventListener("click", function (event) {
     event.preventDefault();
@@ -195,15 +189,14 @@ document.getElementById("deleteProductBtn").addEventListener("click", function (
     var result = deleteProduct(id);
 
     if (typeof result === "string") {
-        showMessage(result, true);
+        showStatus(result, true);
     } else {
-        showMessage("Product deleted successfully!", false);
+        showStatus("Product deleted successfully!", false);
         document.getElementById("deleteIdInput").value = "";
     }
 });
 
-document.getElementById("cancelDeleteBtn")
-    .addEventListener("click", hideAll);
+document.getElementById("cancelDeleteBtn").addEventListener("click", hideEverything);
 
 document.getElementById("findByIdBtn").addEventListener("click", function (event) {
     event.preventDefault();
@@ -212,49 +205,45 @@ document.getElementById("findByIdBtn").addEventListener("click", function (event
     var product = getProductById(id);
 
     if (product) {
-        showProducts(
-            [product],
-            `Product Details (ID: ${id})`
-        );
+        showProductsTable([product], `Product Details (ID: ${id})`);
     } else {
-        hideAll();
-        showMessage("Error: Product not found.", true);
+        hideEverything();
+        showStatus("Error: Product not found.", true);
     }
 });
 
-document.getElementById("cancelShowByIdBtn")
-    .addEventListener("click", hideAll);
+document.getElementById("cancelShowByIdBtn").addEventListener("click", hideEverything);
 
 document.getElementById("menuAddBtn").addEventListener("click", function () {
-    setupAddMode();
-    clearInputs();
+    openAddForm();
+    clearForm();
 });
 
 document.getElementById("menuShowAllBtn").addEventListener("click", function () {
-    showProducts(getAllProducts(), "All Products");
+    showProductsTable(getAllProducts(), "All Products");
 });
 
 document.getElementById("menuShowByIdBtn").addEventListener("click", function () {
-    hideAll();
+    hideEverything();
 
     document.getElementById("showByIdForm").classList.remove("hidden");
     document.getElementById("showByIdInput").value = "";
 });
 
 document.getElementById("menuUpdateBtn").addEventListener("click", function () {
-    setupUpdateMode();
-    clearInputs();
+    openUpdateForm();
+    clearForm();
 });
 
 document.getElementById("menuDeleteBtn").addEventListener("click", function () {
-    hideAll();
+    hideEverything();
 
     document.getElementById("deleteForm").classList.remove("hidden");
     document.getElementById("deleteIdInput").value = "";
 });
 
 document.getElementById("menuSearchBtn").addEventListener("click", function () {
-    hideAll();
+    hideEverything();
 
     document.getElementById("searchForm").classList.remove("hidden");
     document.getElementById("searchKeywordInput").value = "";
