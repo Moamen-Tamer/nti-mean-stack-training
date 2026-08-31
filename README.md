@@ -12,3 +12,4 @@
 - [X] Day 4
 - [X] Day 5
 - [X] Day 6
+- [X] Day 7
