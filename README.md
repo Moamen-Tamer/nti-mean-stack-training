@@ -13,3 +13,6 @@
 - [X] Day 5
 - [X] Day 6
 - [X] Day 7
+- [X] Day 8
+- [X] Day 9 - A
+- [X] Day 9 - B

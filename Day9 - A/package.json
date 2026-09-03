@@ -1,0 +1,11 @@
+{
+  "name": "@moamentamer/first-package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tasks.js",
+  "scripts": {
+    "dev": "node tasks.js"
+  },
+  "keywords": [],
+  "type": "module"
+}
